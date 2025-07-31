@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
 export default async function handler(req, res) {
-  // السماح بطلبات OPTIONS (Preflight requests)
+  // Allow OPTIONS method for pre-flight requests from browsers
   if (req.method === 'OPTIONS') {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -9,11 +9,12 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
+  // Set CORS headers for all other requests
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
-  // التأكد من أن الطلب هو POST
+  // Reject any method that is not POST
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
