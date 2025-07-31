@@ -144,7 +144,7 @@
                 }
 
                 const data = await response.json();
-                const apiResponseText = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || 'لم يتم تلقي استجابة واضحة من الـ API.';
+                const apiResponseText = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || JSON.stringify(data, null, 2);
                 
                 addMessage(apiResponseText, 'api');
                 // إضافة رد الـ API لتاريخ المحادثة
